@@ -5,8 +5,7 @@ in vec3 Colour;
 uniform float xlocation;
 uniform float ylocation;
 uniform int size_coord;
-const int size_array = size_coord;
-uniform float[1000] coordinates;
+uniform float[200] coordinates;
 
 void main()
 {
