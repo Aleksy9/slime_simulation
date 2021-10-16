@@ -1,3 +1,5 @@
 https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/gl_FragCoord.xhtml
 
 https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
+
+https://riptutorial.com/opengl/example/23675/basics-of-framebuffers

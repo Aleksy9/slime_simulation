@@ -2,6 +2,7 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 #include<math.h>
+#include<cstdlib>
 
 #include"shaderClass.hpp"
 #include"VAO.hpp"
@@ -119,6 +120,19 @@ int main()
 
 	GLuint xID = glGetUniformLocation(shaderProgram.ID, "xlocation");
 	GLuint yID = glGetUniformLocation(shaderProgram.ID, "ylocation");
+	GLuint coordID = glGetUniformLocation(shaderProgram.ID, "coordinates");
+	GLuint sizeID = glGetUniformLocation(shaderProgram.ID, "size_coord");
+
+	
+
+	// Generate seed for the random number generator
+	srand(static_cast <unsigned> (0));
+
+	// Create array of ants coordinates;
+	int number_ants = 500;
+	int size_array_ants = 2*number_ants;
+	float ant_coord[size_array_ants];
+	
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -129,10 +143,21 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
 		shaderProgram.Activate();
+		
+		float r2 = static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/400.0f));
+		for (size_t i = 0; i < size_array_ants; i++)
+		{
+			ant_coord[i] = static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/800.0f));
+		}
+		
+
 		// Assigns a value to the uniform; NOTE: Must always be done after activating the Shader Program
 		glUniform1f(uniID, 0.5f);
 		glUniform1f(xID, 10.0f);
-		glUniform1f(yID, 10.0f);
+		glUniform1f(yID, r2);
+		glUniform1fv(coordID,size_array_ants,ant_coord);
+		glUniform1i(sizeID,size_array_ants);
+
 		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
 		// Draw primitives, number of indices, datatype of indices, index of indices
