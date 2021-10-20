@@ -67,14 +67,16 @@ int main()
 	
 	// Specify the viewport of OpenGL in the Window
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
-	glViewport(0, 0, 800, 800);
+	glViewport(0, 0, width, height);
 
 	
 
 	// Generates Shader object using shaders defualt.vert and default.frag
 	Shader shaderProgram("default.vert", "default.frag");  // Error here
-	
-/* 	// Create Framebuffer
+	Shader swapshaderProgram("swap.vert","swap.frag");
+	swapshaderProgram.setInt("screenTexturer", 0);
+
+	// Create Framebuffer
 	unsigned int FBO;
 	glGenFramebuffers(1, &FBO);
 	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
@@ -96,8 +98,8 @@ int main()
     {
 		std::string worked("worked fine");
 		std::cout << worked;
-	} */
-
+	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);  
 	std::cout << "hello" << std::endl;
 	// Generates Vertex Array Object and binds it
 	VAO VAO1;
@@ -115,7 +117,7 @@ int main()
 	VAO1.Unbind();
 	VBO1.Unbind();
 	EBO1.Unbind();
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);  
+	
 
 	// Gets ID of uniform called "scale"
 	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
@@ -139,6 +141,8 @@ int main()
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
+		// Bind the framebuffer
+		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 		// Specify the color of the background
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		// Clean the back buffer and assign the new color to it
@@ -164,6 +168,27 @@ int main()
 		VAO1.Bind();
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+		// Unbind the VAO so the main framebuffer doesnt use it
+		VAO1.Unbind();
+		// Delete Shader Program for this Frambuffer
+		shaderProgram.Delete();
+		// Unbind the FBO
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+		VAO1.Bind();
+		// Start buffer swapping process
+		glDisable(GL_DEPTH_TEST);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		swapshaderProgram.Activate();
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+
+		// Delete swapShaderProgram
+		swapshaderProgram.Delete();
+
+		VAO1.Unbind();
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
@@ -177,7 +202,8 @@ int main()
 	VBO1.Delete();
 	EBO1.Delete();
 	shaderProgram.Delete();
-	/* glDeleteFramebuffers(1, &FBO); */
+	swapshaderProgram.Delete();
+	glDeleteFramebuffers(1, &FBO);
 	// Delete window before ending the program
 	glfwDestroyWindow(window);
 	// Terminate GLFW before ending the program
