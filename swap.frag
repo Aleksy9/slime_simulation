@@ -1,5 +1,5 @@
 #version 460 core
-out vec4 FragColor;
+out vec4 color;
 
 in vec2 TexCoords;
 
@@ -7,5 +7,6 @@ uniform sampler2D screenTexture;
 
 void main()
 {
-    FragColor = texture(screenTexture, TexCoords);
+    //gl_FragColor = texture(screenTexture, TexCoords);
+    color = texture(screenTexture,TexCoords);
 };
