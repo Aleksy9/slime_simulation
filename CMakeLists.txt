@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13.4)
 project(slime_simulation_cmake)
 
 # Makes executable
-add_executable(${PROJECT_NAME} main.cpp glad.c EBO.cpp shaderClass.cpp VAO.cpp)
+add_executable(${PROJECT_NAME} main.cpp glad.c EBO.cpp shaderClass.cpp VAO.cpp stb_image.cpp)
 
 # Cmake can find subdirectory
 #add_subdirectory(Adder)
