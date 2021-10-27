@@ -1,7 +1,6 @@
 #version 460 core
-layout(location = 0) out vec4 FragColor;
-//out vec4 FragColor;
-//in vec3 Colour;
+out vec4 FragColor;
+in vec2 texCoords;
 in vec4 gl_FragCoord;
 
 uniform float xlocation;
@@ -9,8 +8,41 @@ uniform float ylocation;
 uniform int size_coord;
 uniform float[200] coordinates;
 
+uniform sampler2D screenTexture;
+
+const float offset_x = 1.0f / 800.0f;  
+const float offset_y = 1.0f / 800.0f;  
+
+vec2 offsets[9] = vec2[]
+(
+    vec2(-offset_x,  offset_y), vec2( 0.0f,    offset_y), vec2( offset_x,  offset_y),
+    vec2(-offset_x,  0.0f),     vec2( 0.0f,    0.0f),     vec2( offset_x,  0.0f),
+    vec2(-offset_x, -offset_y), vec2( 0.0f,   -offset_y), vec2( offset_x, -offset_y) 
+);
+
+float kernel[9] = float[]
+(
+    1,  1, 1,
+    1, -8, 1,
+    1,  1, 1
+);
+
 void main()
 {
+    vec3 color = vec3(0.0f);
+    for(int i = 0; i < 9; i++)
+
+        // This next line does some weird stuff
+        //color += vec3(texture(screenTexture, texCoords.st + offsets[i])) * kernel[i];
+        color += vec3(texture(screenTexture, texCoords.st )) ;
+
+    if(color.z<0.5f)
+    {
+        color.z = 0.0f;
+    }
+    FragColor = vec4(color.x,color.y,color.z*0.1f, 1.0f);
+
+
     float xlocation_up = xlocation + 10.0f;
     float xlocation_down = xlocation ;
     float ylocation_up = ylocation + 10.0f;
@@ -36,11 +68,4 @@ void main()
     {    
         FragColor = vec4(0.0f,0.5f,0.5f,1.0f);
     } 
-    else 
-    {
-        //diffuseColor = vec4(1.0f,0.0f,0.0f, 1.0f);
-    }
-    
-    
-   
-};
+}

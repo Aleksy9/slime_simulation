@@ -19,6 +19,7 @@ class Shader
 
         void Activate();
         void Delete();
+        void setInt(const std::string &name, int value) const;
 
     private:
         // Checks if the different Shaders have compiled properly
