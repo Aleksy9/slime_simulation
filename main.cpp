@@ -8,7 +8,7 @@
 #include"VAO.hpp"
 #include"VBO.hpp"
 #include"EBO.hpp"
-#include"stb_image.h"
+
 
 
 

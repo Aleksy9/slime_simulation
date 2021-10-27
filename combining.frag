@@ -27,6 +27,8 @@ float kernel[9] = float[]
     1,  1, 1
 );
 
+float size_ants = 3.0f;
+
 void main()
 {
     vec3 color = vec3(0.0f);
@@ -52,9 +54,9 @@ void main()
 
     for(int i=0;i<100;i++)
     {
-        float xlocation_up = coordinates[2*i] + 10.0f;
+        float xlocation_up = coordinates[2*i] + size_ants;
         float xlocation_down = coordinates[2*i] ;
-        float ylocation_up = coordinates[2*i+1] + 10.0f;
+        float ylocation_up = coordinates[2*i+1] + size_ants;
         float ylocation_down = coordinates[2*i+1] ;
 
         if(gl_FragCoord.x<xlocation_up && gl_FragCoord.x>xlocation_down && gl_FragCoord.y<ylocation_up && gl_FragCoord.y>ylocation_down )
