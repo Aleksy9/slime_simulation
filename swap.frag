@@ -24,10 +24,10 @@ float kernel[9] = float[]
 void main()
 {
     vec3 color = vec3(0.0f);
-    for(int i = 0; i < 9; i++)
+    //for(int i = 0; i < 9; i++)
 
         // This next line does some weird stuff
         //color += vec3(texture(screenTexture, texCoords.st + offsets[i])) * kernel[i];
-        color += vec3(texture(screenTexture, texCoords.st )) ;
+    color = vec3(texture(screenTexture, texCoords.st )) ;
     FragColor = vec4(color, 1.0f);
 }

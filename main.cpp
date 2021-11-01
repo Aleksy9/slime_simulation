@@ -215,14 +215,15 @@ int main()
 	srand(static_cast <unsigned> (0));
 
 	// Create array of ants coordinates;
-	int number_ants = 100;
+	int number_ants = 500;
 	int size_array_ants = 2*number_ants;
 	float ant_coord[size_array_ants];
 
 	float r2 = static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/400.0f));
 	for (size_t i = 0; i < size_array_ants; i++)
 	{
-		ant_coord[i] = static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/800.0f));
+		//ant_coord[i] = static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/800.0f));
+		ant_coord[i] = 400.0f;
 	}
 
 	int counter = 0;
@@ -236,11 +237,11 @@ int main()
 			
 			if(negative>200.0f)
 			{
-				ant_coord[i] += static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/2.0f));
+				ant_coord[i] += static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/1.0f));
 			}
 			else
 			{
-				ant_coord[i] -= static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/2.0f));
+				ant_coord[i] -= static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/1.0f));
 			}
 			
 		}

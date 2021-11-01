@@ -7,7 +7,7 @@ in vec4 gl_FragCoord;
 uniform float xlocation;
 uniform float ylocation;
 uniform int size_coord;
-uniform float[200] coordinates;
+uniform float[1000] coordinates;
 
 void main()
 {
@@ -18,7 +18,7 @@ void main()
     int loop_length = size_coord/2;
     int active_pixel = 0;
 
-    for(int i=0;i<100;i++)
+    for(int i=0;i<1000;i++)
     {
         float xlocation_up = coordinates[2*i] + 10.0f;
         float xlocation_down = coordinates[2*i] ;
@@ -34,7 +34,7 @@ void main()
     
     if(active_pixel ==1)
     {    
-        FragColor = vec4(0.0f,0.5f,0.5f,1.0f);
+        FragColor = vec4(0.0f,0.0f,1.0f,1.0f);
     } 
     else 
     {
