@@ -9,6 +9,8 @@ uniform float ylocation;
 uniform int size_coord;
 uniform float[1000] coordinates;
 
+float ant_size = 1.0f;
+
 void main()
 {
     float xlocation_up = xlocation + 10.0f;
@@ -20,9 +22,9 @@ void main()
 
     for(int i=0;i<1000;i++)
     {
-        float xlocation_up = coordinates[2*i] + 10.0f;
+        float xlocation_up = coordinates[2*i] + ant_size;
         float xlocation_down = coordinates[2*i] ;
-        float ylocation_up = coordinates[2*i+1] + 10.0f;
+        float ylocation_up = coordinates[2*i+1] + ant_size;
         float ylocation_down = coordinates[2*i+1] ;
 
         if(gl_FragCoord.x<xlocation_up && gl_FragCoord.x>xlocation_down && gl_FragCoord.y<ylocation_up && gl_FragCoord.y>ylocation_down )

@@ -21,12 +21,6 @@ GLfloat vertices[] =
 	1.0f, 1.0f,  0.0f,     0.8f, 0.3f,  0.02f, // Lower right corner
 };
 
-/* { //               COORDINATES                  /     COLORS           //
-	
-	 0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner right
-	 0.0f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f  // Inner down
-}; */
-
 // Indices for vertices order
 GLuint indices[] =
 {
@@ -104,17 +98,6 @@ int main()
 	swapProgram.Activate();
 	glUniform1i(glGetUniformLocation(swapProgram.ID, "screenTexture"), 0);
 	
-	/* // Enables the Depth Buffer
-	glEnable(GL_DEPTH_TEST);
-
-	// Enables Cull Facing
-	glEnable(GL_CULL_FACE);
-	// Keeps front faces
-	glCullFace(GL_FRONT);
-	// Uses counter clock-wise standard
-	glFrontFace(GL_CCW); */
-	
-
 	// Prepare framebuffer rectangle VBO and VAO
 	unsigned int rectVAO, rectVBO;
 	glGenVertexArrays(1, &rectVAO);
@@ -223,7 +206,7 @@ int main()
 	for (size_t i = 0; i < size_array_ants; i++)
 	{
 		//ant_coord[i] = static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/800.0f));
-		ant_coord[i] = 400.0f;
+		ant_coord[i] = 100.0f+ static_cast <float> (rand())/ (static_cast <float> (RAND_MAX/600.0f));
 	}
 
 	int counter = 0;
