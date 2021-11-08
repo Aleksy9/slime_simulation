@@ -40,12 +40,12 @@ void main()
 
 
     
-    if(color.z<0.3f)
+    if(color.z<0.2f)
     {
         color.z = 0.0f;
     }
     
-    FragColor = vec4(color.x,color.y,color.z*0.99f, 1.0f);
+    FragColor = vec4(color.x,color.y,color.z-0.002f, 1.0f);
 
     float xlocation_up = xlocation + 10.0f;
     float xlocation_down = xlocation ;

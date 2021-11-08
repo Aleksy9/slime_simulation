@@ -4,10 +4,10 @@
 #include<math.h>
 #include<cstdlib>
 
-#include"shaderClass.hpp"
-#include"VAO.hpp"
-#include"VBO.hpp"
-#include"EBO.hpp"
+#include<shaderClass.hpp>
+#include<VAO.hpp>
+#include<VBO.hpp>
+#include<EBO.hpp>
 
 
 
@@ -87,13 +87,13 @@ int main()
 	
 
 	// Generates Shader object using shaders defualt.vert and default.frag
-	Shader shaderProgram("default.vert", "default.frag");  // Error here
+	Shader shaderProgram("Classes/default.vert", "Classes/default.frag");  // Error here
 
-	Shader combiningProgram("combining.vert","combining.frag");
+	Shader combiningProgram("Classes/combining.vert","Classes/combining.frag");
 	combiningProgram.Activate();
 	glUniform1i(glGetUniformLocation(combiningProgram.ID, "screenTexture"), 0);
 	
-	Shader swapProgram("swap.vert", "swap.frag"); // ERROR HERE
+	Shader swapProgram("Classes/swap.vert", "Classes/swap.frag"); // ERROR HERE
 
 	swapProgram.Activate();
 	glUniform1i(glGetUniformLocation(swapProgram.ID, "screenTexture"), 0);
